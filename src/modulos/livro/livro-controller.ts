@@ -17,13 +17,13 @@ export class LivroController {
         // tslint:disable-next-line:max-line-length
         [sequelize.literal("(SELECT COUNT(id) FROM Avaliacao WHERE Avaliacao.LivroId = LivroIdReferencia)"), "totalAvaliacoes"],
         // tslint:disable-next-line:max-line-length
-        [sequelize.literal("(SELECT COUNT(id) FROM Avaliacao WHERE estadoConservacao = 'Ótimo' AND LivroId = LivroIdReferencia )"), "percentualOtimo"],
+        [sequelize.literal("((SELECT COUNT(id) FROM Avaliacao WHERE estadoConservacao = 'Ótimo' AND LivroId = LivroIdReferencia ) * 100 / (SELECT COUNT(id) FROM Avaliacao WHERE Avaliacao.LivroId = LivroIdReferencia))"), "percentualOtimo"],
         // tslint:disable-next-line:max-line-length
-        [sequelize.literal("(SELECT COUNT(id) FROM Avaliacao WHERE estadoConservacao = 'Bom' AND LivroId = LivroIdReferencia )"), "percentualBom"],
+        [sequelize.literal("((SELECT COUNT(id) FROM Avaliacao WHERE estadoConservacao = 'Bom' AND LivroId = LivroIdReferencia ) * 100 / (SELECT COUNT(id) FROM Avaliacao WHERE Avaliacao.LivroId = LivroIdReferencia))"), "percentualBom"],
         // tslint:disable-next-line:max-line-length
-        [sequelize.literal("(SELECT COUNT(id) FROM Avaliacao WHERE estadoConservacao = 'Ruim' AND LivroId = LivroIdReferencia )"), "percentualRuim"],
+        [sequelize.literal("((SELECT COUNT(id) FROM Avaliacao WHERE estadoConservacao = 'Ruim' AND LivroId = LivroIdReferencia ) * 100 / (SELECT COUNT(id) FROM Avaliacao WHERE Avaliacao.LivroId = LivroIdReferencia))"), "percentualRuim"],
         // tslint:disable-next-line:max-line-length
-        [sequelize.literal("(SELECT COUNT(id) FROM Avaliacao WHERE estadoConservacao = 'Regular' AND LivroId = LivroIdReferencia )"), "percentualRegular"],
+        [sequelize.literal("((SELECT COUNT(id) FROM Avaliacao WHERE estadoConservacao = 'Regular' AND LivroId = LivroIdReferencia ) * 100 / (SELECT COUNT(id) FROM Avaliacao WHERE Avaliacao.LivroId = LivroIdReferencia))"), "percentualRegular"],
         [sequelize.literal("(SELECT AVG(nota) FROM Avaliacao WHERE LivroId = LivroIdReferencia)"), "mediaNota"],
       ],
       include: [{
